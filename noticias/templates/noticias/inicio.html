@@ -1,0 +1,32 @@
+{% extends "noticias/base.html" %}
+
+{% block title %}Inicio - Portal de Noticias Django{% endblock %}
+
+{% block content %}
+<h2>Últimas Noticias</h2>
+
+{% for articulo in ultimos_articulos %}
+<article class="article-card">
+    <h3 class="article-card__title">
+        <a href="{{ articulo.get_absolute_url }}" class="article-card__link">{{ articulo.titulo }}</a>
+    </h3>
+    
+    <div class="article-card__meta">
+        <span>Por {{ articulo.autor.username }}</span>
+        <span>en {{ articulo.categoria.nombre }}</span>
+        <span>el {{ articulo.fecha_publicacion|date:"j F, Y" }}</span>
+    </div>
+    
+    {% if articulo.imagen %}
+    <img src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }}" class="article-card__image">
+    {% endif %}
+    
+    <div class="article-card__content">
+        <p>{{ articulo.contenido|truncatewords:50 }}</p>
+        <a href="{{ articulo.get_absolute_url }}" class="article-card__link">Leer más</a>
+    </div>
+</article>
+{% empty %}
+<p>No hay artículos disponibles.</p>
+{% endfor %}
+{% endblock %}

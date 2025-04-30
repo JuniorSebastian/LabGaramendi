@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ categoria.nombre }}</title>
+</head>
+<body>
+    <h1>{{ categoria.nombre }}</h1>
+    <p>{{ categoria.descripcion }}</p> <!-- Si tienes una descripción en el modelo Categoria -->
+    
+    <h2>Artículos en esta categoría:</h2>
+    <ul>
+        {% for articulo in articulos_categoria %}
+            <li>
+                <a href="{{ articulo.get_absolute_url }}">{{ articulo.titulo }}</a>
+            </li>
+        {% empty %}
+            <li>No hay artículos en esta categoría aún.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
